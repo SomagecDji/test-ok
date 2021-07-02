@@ -8,9 +8,5 @@ class DocumentFolder(models.Model):
     active=fields.Boolean('Active', default=True)
 class ResCompany(models.Model):
     _inherit = "res.company"
-
-    def _domain_company(self):
-        company = self.env.company
-        return ['|', ('company_id', '=', False), ('company_id', '=', company)]
-    project_folder = fields.Many2one('documents.folder', string="Project Workspace", domain=_domain_company)
+    project_folder = fields.Many2one('documents.folder', string="Project Workspace")
 
