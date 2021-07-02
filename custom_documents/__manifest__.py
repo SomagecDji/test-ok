@@ -14,7 +14,7 @@
     'website': 'https://www.odoo.com/page/documents',
 
     # any module necessary for this one to work correctly
-    'depends': ['base', 'mail', 'portal', 'web', 'attachment_indexation','documents','documents_account','documents_fleet','documents_hr','documents_project'],
+    'depends': ['base', 'mail', 'portal', 'web', 'attachment_indexation','documents','project','documents_project'],
 
     # always loaded
     'data': [
