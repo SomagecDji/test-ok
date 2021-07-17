@@ -5,9 +5,6 @@ class DocumentFolder(models.Model):
     _description = 'Document folder'
     _inherit = 'documents.folder' 
     admin_group_ids = fields.Many2many('res.groups',  'documents_folder_admin_groups',string="Groupe d'écriture")
-    group_ids=fields.Many2many('res.groups', onchange=inherit_groups_write)
-    read_group_ids=fields.Many2many('res.groups', onchange=inherit_groups_read)
-    active=fields.Boolean('Active', default=True)
     @api.onchange('parent_folder_id')
     def inherit_groups_write(self):
         if self.parent_folder_id:
@@ -24,6 +21,10 @@ class DocumentFolder(models.Model):
             if parent_folder.read_group_ids:
                 for id in [group.id for group in  parent_folder.read_group_ids ]:
                     self.write({'read_group_ids':[(4,id)]})
+    group_ids=fields.Many2many('res.groups', onchange=inherit_groups_write)
+    read_group_ids=fields.Many2many('res.groups', onchange=inherit_groups_read)
+    active=fields.Boolean('Active', default=True)
+    
     def custom_groups(self):
         folders=self.env['documents.folder'].search([])
         for folder in folders:
